@@ -1,30 +1,31 @@
- public class Solution {
+class Solution {
     public String countAndSay(int n) {
-        String s = "1";
-        for(int i = 1; i < n; i++){
-            s = countIdx(s);
-        }
-        return s;
-    }
-    
-    public String countIdx(String s){
-        StringBuilder sb = new StringBuilder();
-        char c = s.charAt(0);
-        int count = 1;
-        for(int i = 1; i < s.length(); i++){
-            if(s.charAt(i) == c){
-                count++;
-            }
-            else
+        String target = "1";
+        if(n==1)
+            return target;
+        
+        for(int j=2;j<=n;j++)
+        {
+            int curr = 1;
+            String s ="";
+            for(int i=1;i<target.length();i++)
             {
-                sb.append(count);
-                sb.append(c);
-                c = s.charAt(i);
-                count = 1;
+                if(target.charAt(i)!=target.charAt(i-1))
+                {
+                   s+=Integer.toString(curr);
+                   s+=target.charAt(i-1);
+                   curr=1;
+                }else{
+                    curr++;
+                }
             }
+            if(curr>0)
+            {
+                 s+=Integer.toString(curr);
+                 s+=target.charAt(target.length()-1);
+            }
+            target = s;
         }
-        sb.append(count);
-        sb.append(c);
-        return sb.toString();
+        return target;
     }
 }
