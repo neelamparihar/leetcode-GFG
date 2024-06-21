@@ -1,33 +1,32 @@
 class Solution {
     public void nextPermutation(int[] nums) {
         int n = nums.length;
-        // store the breaking point
-        int idx = -1;
-
-        for(int i = n-2 ; i>=0 ; i--) {
-            if(nums[i] < nums[i+1]) {
-                idx = i;
+        int peak =-1;
+        for(int i= n-2;i>=0;i--)
+        {
+            if(nums[i]<nums[i+1])
+            {
+                peak = i;
                 break;
             }
         }
-        
-        // base case - no breakpoint found
-        if(idx == -1) {
-            Arrays.sort(nums, 0, n);
+        if(peak==-1)
+        {
+            Arrays.sort(nums);
             return;
         }
-
-
-        // finding the greater but closest num
-        for(int i=n-1 ; i>idx ; i--) {
-            if(nums[i] > nums[idx]) {
-                int temp = nums[i];
-                nums[i] = nums[idx];
-                nums[idx] = temp;
-                break;
+            for(int i=n-1;i>peak;i--)
+            {
+                if(nums[i]>nums[peak])
+                {
+                    int j=nums[i];
+                    nums[i]=nums[peak];
+                    nums[peak]=j;
+                    break;
+                }
             }
-        }
-        // Reversing the remaining array.
-        Arrays.sort(nums, idx+1, n);
+        
+        Arrays.sort(nums,peak+1,n);
+        
     }
 }
